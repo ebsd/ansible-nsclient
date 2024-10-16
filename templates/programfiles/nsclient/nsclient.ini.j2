@@ -1,12 +1,4 @@
-﻿#jinja2: newline_sequence:'\r\n'
-# If you want to fill this file with all available options run the following command:
-#   nscp settings --generate --add-defaults --load-all
-# If you want to activate a module and bring in all its options use:
-#   nscp settings --activate-module <MODULE NAME> --add-defaults
-# For details run: nscp settings --help
-
-
-[/settings/default]
+﻿[/settings/default]
 {% if nsclient_settings_password is defined  %}
 password = {{ nsclient_settings_password }}
 {% endif %}
@@ -18,6 +10,16 @@ allowed hosts = 127.0.0.1
 {% endif %}
 
 [/settings/NRPE/server]
+{% if nsclient_nrpe_usessl is defined %}
+use ssl = {{ nsclient_nrpe_usessl is defined }}
+{% else %}
+use ssl = 0
+{% endif %}
+{% if nsclient_nrpe_allownastycharacters is defined %}
+allow nasty characters = {{ nsclient_nrpe_allownastycharacters }}
+{% else %}
+allow nasty characters = 0
+{% endif %}
 {% if nsclient_nrpe_ssloptions is defined  %}
 ssl options = {{ nsclient_nrpe_ssloptions }}
 {% endif %}
@@ -52,7 +54,6 @@ CheckNSCP = {{ nsclient_modules_checknscp | default(1) }}
 ; CheckSystem - Various system related checks, such as CPU load, process state, service state memory usage and PDH counters.
 CheckSystem = {{ nsclient_modules_checksystem | default(1) }}
 
-
 ; CheckWMI - CheckWMI can check various file and disk related things. The current version has commands to check Size of hard drives and directories.
 CheckWMI = {{ nsclient_modules_checkwmi | default(1) }}
 
@@ -67,10 +68,14 @@ NSClientServer = {{ nsclient_modules_nsclientserver | default(1) }}
 
 [/settings/external scripts]
 {% if nsclient_external_scripts_allow_arguments is defined  %}
-allow arguments={{ nsclient_external_scripts_allow_arguments }}
+allow arguments=1
+{% else %}
+allow arguments=0
 {% endif %}
 [/settings/external scripts/scripts]
+{% if nsclient_external_scripts_allow_arguments is defined  %}
 {% for external_script in nsclient_external_scripts %}
 {{ external_script.name }}={{ external_script.command }}
 {% endfor %}
+{% endif %}
 

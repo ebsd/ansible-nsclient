@@ -3,24 +3,24 @@
 
 - name: Create setup folder
   win_file:
-    path: C:\setup
+    path: C:\sources
     state: directory
 
 - name: Check for "NSClient++"
   win_stat:
-    path: "c:\\setup\\NSCP-0.5.0.62-x64.msi"
+    path: "c:\\sources\\NSCP-0.5.0.62-x64.msi"
   register: msipackagestat
 
 - name: Download "NSClient++"
   win_get_url:
-    url: "https://github.com/mickem/nscp/releases/download/0.5.0.62/NSCP-0.5.0.62-x64.msi"
-    dest: "C:\\setup\\NSCP-0.5.0.62-x64.msi"
+    url: "https://github.com/mickem/nscp/releases/download/0.5.2.41/NSCP-0.5.2.41-x64.msi"
+    dest: "C:\\sources\\NSCP-0.5.2.41-x64.msi"
   when: not msipackagestat.stat.exists
 
 - name: Install "NSClient++"
-  win_msi:
-    path: "C:\\setup\\NSCP-0.5.0.62-x64.msi"
-    wait: True
+  win_package:
+    path: "C:\\sources\\NSCP-0.5.2.41-x64.msi"
+    state: present
   when: not msipackagestat.stat.exists
 
 - name: Update NSClient++ configuration
