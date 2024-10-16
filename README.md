@@ -18,7 +18,7 @@
 * `nsclient_modules_checksystem`: [default: 1]:
 * `nsclient_modules_nrpeserver`: [default: 1]:
 * `nsclient_external_scripts_allow_arguments`
-* `nsclient_external_scripts: []
+* `nsclient_external_scripts: []`
 
 ## Dependencies
 
@@ -30,10 +30,12 @@ None
 ---
 - hosts: all
   roles:
-    - janneojala.nsclient
+    - ./ ansible-nsclient
   vars:
     nsclient_settings_password: CHANGE_ON_INSTALL
     nsclient_settings_allowed_hosts: 127.0.0.1,::1
+    nsclient_nrpe_allow_arguments: 1
+    allow nasty characters: 1
     nsclient_external_scripts:
       - name: check_updates
         command: cmd /c echo scripts/check_windows_updates.ps1; exit $LastExitCode | powershell.exe -command -
