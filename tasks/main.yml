@@ -31,6 +31,24 @@
   tags:
     - configuration
 
+- name: Copy nsclient private key
+  ansible.windows.win_copy:
+    src: ../files/nsclient.key
+    dest: C:\Program Files\NSClient++\security\nsclient.key
+  when: nsclient_nrpe_usessl == 1
+
+- name: Copy nsclient cert
+  ansible.windows.win_copy:
+    src: ../files/nsclient.pem
+    dest: C:\Program Files\NSClient++\security\nsclient.pem
+  when: nsclient_nrpe_usessl == 1
+
+- name: Copy librenms CA cert
+  ansible.windows.win_copy:
+    src: ../files/ca_cert.pem
+    dest: C:\Program Files\NSClient++\security\ca_cert.pem
+  when: nsclient_nrpe_usessl == 1
+
 - name: Restart NSClient++
   win_service:
     name: nscp

@@ -11,7 +11,13 @@ allowed hosts = 127.0.0.1
 
 [/settings/NRPE/server]
 {% if nsclient_nrpe_usessl is defined %}
-use ssl = {{ nsclient_nrpe_usessl is defined }}
+use ssl = {{ nsclient_nrpe_usessl }}
+verify mode = peer-cert
+certificate = C:\Program Files\NSClient++\security\nsclient.pem
+certificate key = C:\Program Files\NSClient++\security\nsclient.key
+ca = C:\Program Files\NSClient++\security\ca_cert.pem
+dh =
+insecure = 0
 {% else %}
 use ssl = 0
 {% endif %}
