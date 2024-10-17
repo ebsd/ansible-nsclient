@@ -2,7 +2,7 @@
 
 [NSClient++](https://https://www.nsclient.org//) role for Ansible
 
-#### Variables
+## Variables
 
 * `nsclient_settings_password`: [default: CHANGE_ON_INSTALL]: Password used to authenticate against server
 * `nsclient_settings_allowed_hosts: [default: 127.0.0.1,::1]: A comaseparated list of allowed hosts. You can use netmasks (/ syntax) or * to create ranges..
@@ -19,12 +19,15 @@
 * `nsclient_modules_nrpeserver`: [default: 1]:
 * `nsclient_external_scripts_allow_arguments`
 * `nsclient_external_scripts: []`
+* `nsclient_nrpe_usessl`: [default: None]: set to `1` if you want to use SSL certificates on NRPE server
 
 ## Dependencies
 
 None
 
-#### Basic installation
+## Basic installation
+
+playbook example :
 
 ```yaml
 ---
@@ -42,14 +45,19 @@ None
 
 ```
 
-#### License
+## Certificates 
+
+Put certificates et keys in ../files folder,
+when using  `nsclient_nrpe_usessl: 1`
+
+## License
 
 MIT
 
-#### Author Information
+## Author Information
 
 Janne Ojala
 
-#### Issues
+## Issues
 
 Are [welcome](https://github.com/janneojala/ansible-nsclient/issues)!
