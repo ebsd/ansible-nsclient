@@ -1,4 +1,4 @@
-## nsclient
+# nsclient
 
 [NSClient++](https://https://www.nsclient.org//) role for Ansible
 
@@ -38,6 +38,7 @@ playbook example :
     nsclient_settings_password: CHANGE_ON_INSTALL
     nsclient_settings_allowed_hosts: 127.0.0.1,::1
     nsclient_nrpe_allow_arguments: 1
+    nsclient_nrpe_usessl: 1
     allow nasty characters: 1
     nsclient_external_scripts:
       - name: check_updates
